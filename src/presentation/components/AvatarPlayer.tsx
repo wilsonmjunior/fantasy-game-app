@@ -5,19 +5,19 @@ import { Colors } from "@/src/constants/Colors";
 const sizes = {
     xs: {
         size: 56,
-        padding: 8,
+        padding: 4,
     },
     sm: {
         size: 78,
-        padding: 12,
+        padding: 6,
     },
     md: {
         size: 96,
-        padding: 16,
+        padding: 8,
     },
     lg: {
         size: 128,
-        padding: 20,
+        padding: 10,
     },
 };
 
@@ -26,14 +26,20 @@ export type AvatarSize = 'xs' | 'sm' | 'md' | 'lg';
 type PlayerProps = {
     imageUri: string;
     size?: AvatarSize;
+    featuredColor?: string;
 }
 
-export function AvatarPlayer({ imageUri, size = 'sm' }: PlayerProps) {
+export function AvatarPlayer({ 
+    imageUri, 
+    size = 'sm', 
+    featuredColor = Colors.primary[600],
+}: PlayerProps) {
     return (
         <View 
             style={[styles.container, { 
                 width: sizes[size]?.size,
                 height: sizes[size]?.size,
+                backgroundColor: featuredColor,
             }]}
         >
             <Image 
@@ -49,7 +55,6 @@ export function AvatarPlayer({ imageUri, size = 'sm' }: PlayerProps) {
 
 const styles = StyleSheet.create({
     container: { 
-        backgroundColor: Colors.neutral[300],
         justifyContent: 'center', 
         alignItems: 'center',
         borderRadius: '50%',
