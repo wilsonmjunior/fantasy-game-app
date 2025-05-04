@@ -4,6 +4,6 @@ export interface Team {
     id: string;
     name: string;
     shield: string;
-    roundPoints: number;
+    totalRating: number;
     players: Player[];
 }
