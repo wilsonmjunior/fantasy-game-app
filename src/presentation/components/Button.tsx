@@ -1,6 +1,7 @@
-import { Colors } from '@/src/constants/Colors';
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { RectButton, RectButtonProps } from 'react-native-gesture-handler';
+
+import { Colors } from '@/src/constants/Colors';
 
 import { Icon, IconType } from './Icon';
 
@@ -29,11 +30,15 @@ export function Button({
 
     return (
         <RectButton style={[styles.container, { backgroundColor: variants[variant] }]} {...otherProps}>
-            { iconLeft && <Icon name={iconLeft} size={20} color={iconColor} /> }
+            { iconLeft ? <Icon name={iconLeft} size={20} color={iconColor} /> : (
+                <View style={{ width: 24 }} />
+            )}
 
             <Text style={styles.title}>{title}</Text>
 
-            { iconRight && <Icon name={iconRight} size={20} color={iconColor} /> }
+            { iconRight && (
+                <Icon name={iconRight} size={20} color={iconColor} /> 
+            )}
         </RectButton>
     );
 };
@@ -42,13 +47,13 @@ const styles = StyleSheet.create({
     container: {
         padding: 16,
         flexDirection: 'row',
-        justifyContent: 'center',
         alignItems: 'center',
+        justifyContent: 'space-between',
         borderRadius: 16,
         gap: 16,
     },
     title: {
         fontFamily: 'Poppins_600SemiBold',
         fontSize: 18,
-    }
+    },
 });
