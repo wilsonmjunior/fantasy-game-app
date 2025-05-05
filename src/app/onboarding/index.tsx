@@ -6,6 +6,7 @@ import {
   Dimensions,
   FlatList,
   BackHandler,
+  Platform,
 } from 'react-native';
 import { useRouter, useNavigation } from 'expo-router';
 import Animated, { 
@@ -240,7 +241,7 @@ const styles = StyleSheet.create({
   },
   footer: {
     paddingHorizontal: 16,
-    paddingBottom: 32,
+    paddingBottom: Platform.OS === 'android' ? 24 : 0,
   },
   indicators: {
     flexDirection: 'row',
