@@ -1,4 +1,5 @@
 import { Tabs } from 'expo-router';
+import { Platform } from 'react-native';
 
 import { Colors } from '@/src/constants/Colors';
 import { Icon } from '@/src/presentation/components';
@@ -11,12 +12,15 @@ export default function TabLayout() {
         tabBarLabelStyle: {
           textAlign: 'center',
           marginTop: 5,
+          fontFamily: 'Poppins_400Regular',
+          fontSize: 12,
         },
         tabBarStyle: {
           backgroundColor: Colors.secondary[900],
           borderTopWidth: 0,
-          height: 100,
+          height: Platform.OS === 'android' ? 70 : 100,
           paddingTop: 6,
+          paddingBottom: Platform.OS === 'android' ? 12 : 28,
           shadowColor: Colors.black,
           shadowOffset: {
             width: 0,
