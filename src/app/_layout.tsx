@@ -11,7 +11,6 @@ import {
   Poppins_900Black,
   useFonts,
 } from '@expo-google-fonts/poppins';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
 import ToastManager from 'toastify-react-native'
 
 import { Colors } from '../constants/Colors';
@@ -50,46 +49,44 @@ export default function RootLayout() {
     <GestureHandlerRootView style={styles.container}>
       <StatusBar backgroundColor="#1C1C1C" barStyle="light-content" translucent />
 
-      <SafeAreaProvider>
-        <Stack 
-          screenOptions={{ 
+      <Stack 
+        screenOptions={{ 
+          headerShown: false,
+          animation: 'fade',
+        }}
+        initialRouteName="onboarding"
+      >
+        <Stack.Screen 
+          name="index" 
+          options={{ 
+            headerShown: false,
+            gestureEnabled: false,
+          }} 
+        />
+        <Stack.Screen 
+          name="onboarding" 
+          options={{ 
             headerShown: false,
             animation: 'fade',
-          }}
-          initialRouteName="onboarding"
-        >
-          <Stack.Screen 
-            name="index" 
-            options={{ 
-              headerShown: false,
-              gestureEnabled: false,
-            }} 
-          />
-          <Stack.Screen 
-            name="onboarding" 
-            options={{ 
-              headerShown: false,
-              animation: 'fade',
-              gestureEnabled: false,
-            }} 
-          />
-          <Stack.Screen 
-            name="(tabs)" 
-            options={{ 
-              headerShown: false,
-              gestureEnabled: false,
-            }} 
-          />
-          <Stack.Screen 
-            name="profile" 
-            options={{ 
-              headerShown: false,
-              animation: 'slide_from_left',
-              gestureEnabled: true,
-            }} 
-          />
-        </Stack>
-      </SafeAreaProvider>
+            gestureEnabled: false,
+          }} 
+        />
+        <Stack.Screen 
+          name="(tabs)" 
+          options={{ 
+            headerShown: false,
+            gestureEnabled: false,
+          }} 
+        />
+        <Stack.Screen 
+          name="profile" 
+          options={{ 
+            headerShown: false,
+            animation: 'slide_from_left',
+            gestureEnabled: true,
+          }} 
+        />
+      </Stack>
 
       <ToastManager />
     </GestureHandlerRootView>
