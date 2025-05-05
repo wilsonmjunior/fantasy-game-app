@@ -26,7 +26,7 @@ function TeamPlayerCardComponent({ player, isSelected, onToggle }: TeamPlayerCar
     >
       <View style={styles.header}>
         <View style={styles.clubImageBadge}>
-          <Image src={player.clubImage} width={24} height={24} />
+          <Image source={{ uri: player.clubImage }} style={{ width: 24, height: 24 }} />
         </View>
       
         <View style={styles.ratingBadge}>

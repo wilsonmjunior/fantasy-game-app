@@ -23,7 +23,8 @@ export const teamsRepository = {
     async update(data: TeamUpdateParams) {
         try {
             const teamId = data.id;
-            return await api.put(`teams/${teamId}`, data);
+            const response = await api.put<Team>(`teams/${teamId}`, data);
+            return response.data;
         } catch (error) {
             throw error;
         }

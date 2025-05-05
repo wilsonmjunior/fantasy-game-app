@@ -18,13 +18,8 @@ import { Colors } from '../constants/Colors';
  
 SplashScreen.preventAutoHideAsync();
 
-SplashScreen.setOptions({
-  duration: 1 * 1000,
-  fade: true
-});
-
 export default function RootLayout() {
-  const [loaded, error] = useFonts({
+  const [fontsLoaded, fontError] = useFonts({
     Poppins_400Regular,
     Poppins_500Medium,
     Poppins_600SemiBold,
@@ -33,12 +28,16 @@ export default function RootLayout() {
   });
 
   useEffect(() => {
-    if (loaded || error) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded, error]);
+    const hideSplashScreen = async () => {
+      if (fontsLoaded || fontError) {
+        await SplashScreen.hideAsync();
+      }
+    };
 
-  if (!loaded && !error) {
+    hideSplashScreen();
+  }, [fontsLoaded, fontError]);
+
+  if (!fontsLoaded && !fontError) {
     return null;
   }
 

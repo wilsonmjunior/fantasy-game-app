@@ -14,6 +14,7 @@ export function useEditTeam({ teamId }: UseEditParams) {
   const [teamName, setTeamName] = useState('');
   const [teamShield, setTeamShield] = useState('');
   const [isImageValid, setIsImageValid] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const checkImageUrl = (url: string) => {
     setTeamShield(url);
@@ -22,31 +23,35 @@ export function useEditTeam({ teamId }: UseEditParams) {
   };
 
   const handleNext = useCallback(async () => {
+    if (!team) {
+      Alert.alert('Erro', 'Não há dados para o time.');
+      return;
+    }
+
+    if (!teamName?.trim()) {
+      Alert.alert('Erro', 'O nome do time não pode estar vazio.');
+      return;
+    }
+
+    if (!isImageValid) {
+      Alert.alert('Erro', 'A URL da imagem parece ser inválida.');
+      return;
+    }
+
+    setIsLoading(true);
+    
     try {
-      if (!team) {
-        Alert.alert('Erro', 'Não há dados para o time.');
-        return;
-      }
-
-      if (!teamName?.trim()) {
-        Alert.alert('Erro', 'O nome do time não pode estar vazio.');
-        return;
-      }
-  
-      if (!isImageValid) {
-        Alert.alert('Erro', 'A URL da imagem parece ser inválida.');
-        return;
-      }
-
       await updateTeam({
         ...team,
         name: teamName,
         shield: teamShield,
       });
-      
+
       router.push('/(tabs)/team/edit/select-players'); 
-    } catch (error) {
-      Alert.alert('Erro', 'Erro ao salvar dados do time.');
+    } catch (error: any) {
+      Alert.alert('Erro', 'Erro ao salvar dados do time. Tente novamente.');
+    } finally {
+      setIsLoading(false);
     }
   }, [
     team,
@@ -57,12 +62,16 @@ export function useEditTeam({ teamId }: UseEditParams) {
 
   useEffect(() => {
     async function loadTeam() {
+      setIsLoading(true);
       try {
         const response = await getTeam(Number(teamId));
         setTeam(response);
         setTeamName(response.name);
         setTeamShield(response.shield);
-      } catch (error) {
+      } catch (error: any) {
+        Alert.alert('Erro', 'Não foi possível carregar os dados do time.');
+      } finally {
+        setIsLoading(false);
       }
     }
 
@@ -78,8 +87,8 @@ export function useEditTeam({ teamId }: UseEditParams) {
     teamName,
     teamShield,
     setTeamShield,
-    // setIsImageValid,
     setTeamName,
     handleNext,
+    isLoading,
   };
 }

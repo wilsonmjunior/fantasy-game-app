@@ -51,10 +51,8 @@ export function FeaturedPlayersList() {
                         <View style={styles.container}>
                             <View style={styles.content}>
                                 <Image
-                                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUdpgjJWcHi-bdDMsDmOO4Yrk9pBcDYQsO4Q&s" 
-                                    width={64} 
-                                    height={64} 
-                                    style={styles.image}
+                                    source={{ uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUdpgjJWcHi-bdDMsDmOO4Yrk9pBcDYQsO4Q&s" }}
+                                    style={[styles.image, { width: 64, height: 64 }]}
                                 />
                             </View>
                         </View>
