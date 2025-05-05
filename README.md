@@ -1,7 +1,7 @@
 # 🏆 Fantasy Game
 
 <div align="center">
-  <img src="assets/images/logo.png" alt="Fantasy Game Logo" width="200" height="200"/>
+  <img src="assets/images/logo.png" alt="Fantasy Game Logo" width="200" />
   <p><strong>Crie times virtuais, compita com seus amigos e acompanhe seus jogadores favoritos</strong></p>
 </div>
 
