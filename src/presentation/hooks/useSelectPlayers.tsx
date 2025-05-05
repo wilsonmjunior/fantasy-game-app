@@ -10,6 +10,7 @@ import { useLoadTeam } from "./useLoadTeam";
 export function useSelectPlayers() {
   const [selectedPlayers, setSelectedPlayers] = useState<Player[]>([]);
   const [availablePlayers, setAvailablePlayers] = useState<Player[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
 
@@ -36,9 +37,21 @@ export function useSelectPlayers() {
           { text: 'Cancelar', style: 'cancel' },
           { 
             text: 'Continuar', 
-            onPress: () => {
-              console.log('Time finalizado com', selectedPlayers.length, 'jogadores');
-              router.back();
+            onPress: async () => {
+              try {
+                setIsLoading(true);
+                const teamCompleted = {
+                  ...team,
+                  players: selectedPlayers,
+                } as TeamUpdateParams;
+                
+                await onUpdateTeam(teamCompleted);
+                router.replace('/(tabs)/team');
+              } catch (error) {
+                Alert.alert('Erro', 'Não foi possível salvar seu time.');
+              } finally {
+                setIsLoading(false);
+              }
             }
           }
         ]
@@ -47,28 +60,38 @@ export function useSelectPlayers() {
       return;
     }
 
-    const teamCompleted = {
-      ...team,
-      players: selectedPlayers,
-    } as TeamUpdateParams;
+    try {
+      setIsLoading(true);
+      const teamCompleted = {
+        ...team,
+        players: selectedPlayers,
+      } as TeamUpdateParams;
 
-    await onUpdateTeam(teamCompleted);
-
-    router.navigate('/(tabs)/team');
-  }, [selectedPlayers]);
+      await onUpdateTeam(teamCompleted);
+      
+      router.replace('/(tabs)/team');
+    } catch (error) {
+      Alert.alert('Erro', 'Não foi possível salvar seu time.');
+    } finally {
+      setIsLoading(false);
+    }
+  }, [selectedPlayers, team, onUpdateTeam, router]);
 
   useEffect(() => {
     async function loadAvailablePlayers() {
       try {
+        setIsLoading(true);
         const response = await getAvailablePlayers();
         setAvailablePlayers(response);
       } catch (error) {
-        
+        Alert.alert('Erro', 'Não foi possível carregar a lista de jogadores.');
+      } finally {
+        setIsLoading(false);
       }
     }
 
     loadAvailablePlayers();
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (team) {
@@ -80,6 +103,7 @@ export function useSelectPlayers() {
     availablePlayers,
     selectedPlayers,
     handleFinish,
-    togglePlayerSelection
+    togglePlayerSelection,
+    isLoading
   };
 }
