@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { StyleSheet } from 'react-native';
+import { StatusBar, StyleSheet } from 'react-native';
 import { Stack } from 'expo-router';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import * as SplashScreen from 'expo-splash-screen';
@@ -15,6 +15,11 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import ToastManager from 'toastify-react-native'
 
 import { Colors } from '../constants/Colors';
+
+SplashScreen.setOptions({
+  duration: 400,
+  fade: true,
+});
  
 SplashScreen.preventAutoHideAsync();
 
@@ -43,6 +48,8 @@ export default function RootLayout() {
 
   return (
     <GestureHandlerRootView style={styles.container}>
+      <StatusBar backgroundColor="#1C1C1C" barStyle="light-content" translucent />
+
       <SafeAreaProvider>
         <Stack 
           screenOptions={{ 
@@ -59,7 +66,7 @@ export default function RootLayout() {
             }} 
           />
           <Stack.Screen 
-            name="onboarding/index" 
+            name="onboarding" 
             options={{ 
               headerShown: false,
               animation: 'fade',
