@@ -19,7 +19,7 @@ export function PlayerCard({ player, ...othersProps }: PlayerCardProps) {
                     {player.name}
                 </Text>
                 <Text style={styles.playerPoints}>
-                    {`${player.points} XP`}
+                    {`${player.rating} XP`}
                 </Text>
             </View>
 

@@ -1,6 +1,6 @@
 export interface Ranking {
     name:  string;
-    points: number; 
+    rating: number; 
     position: number;
     team: string;
     fieldPosition: string;
