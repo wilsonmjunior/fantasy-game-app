@@ -1,18 +1,18 @@
-import React, { useRef, useState, useCallback } from 'react';
+import React, { useRef, useState, useCallback, useEffect } from 'react';
 import {
   StyleSheet,
   View,
   SafeAreaView,
   Dimensions,
   FlatList,
+  BackHandler,
 } from 'react-native';
-import { useRouter } from 'expo-router';
+import { useRouter, useNavigation } from 'expo-router';
 import Animated, { 
   useSharedValue, 
   useAnimatedStyle, 
   withTiming, 
-  withSpring,
-  runOnJS
+  withSpring
 } from 'react-native-reanimated';
 
 import { Colors } from '../../constants/Colors';
@@ -40,63 +40,126 @@ const PageItem = ({ Component }: { Component: React.ComponentType }) => {
 
 export default function OnboardingScreen() {
   const [currentPage, setCurrentPage] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const router = useRouter();
+  const navigation = useNavigation();
   const flatListRef = useRef<FlatList>(null);
   
   const fadeAnim = useSharedValue(1);
   const buttonScale = useSharedValue(1);
 
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
+      if (currentPage > 0) {
+        goToPreviousPage();
+        return true;
+      }
+      return false;
+    });
+
+    return () => backHandler.remove();
+  }, [currentPage]);
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      setCurrentPage(0);
+      setTimeout(() => {
+        if (flatListRef.current) {
+          flatListRef.current.scrollToIndex({
+            index: 0,
+            animated: false,
+          });
+        }
+      }, 0);
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+
   const goToNextPage = useCallback((nextPage: number) => {
+    if (isTransitioning) return;
+    
+    setIsTransitioning(true);
     setCurrentPage(nextPage);
     
+    try {
+      setTimeout(() => {
+        if (flatListRef.current) {
+          flatListRef.current.scrollToIndex({
+            index: nextPage,
+            animated: false,
+          });
+        }
+        setIsTransitioning(false);
+      }, 50);
+    } catch (error) {
+      console.error('Error scrolling to index:', error);
+      setIsTransitioning(false);
+    }
+  }, [isTransitioning]);
+
+  const goToPreviousPage = useCallback(() => {
+    if (currentPage <= 0 || isTransitioning) return;
+    
+    const prevPage = currentPage - 1;
+    
+    setIsTransitioning(true);
+    fadeAnim.value = withTiming(0.5, { duration: 150 });
+    
     setTimeout(() => {
+      setCurrentPage(prevPage);
       if (flatListRef.current) {
         flatListRef.current.scrollToIndex({
-          index: nextPage,
+          index: prevPage,
           animated: false,
         });
       }
-    }, 10);
-  }, []);
+      
+      setTimeout(() => {
+        fadeAnim.value = withTiming(1, { duration: 250 });
+        setIsTransitioning(false);
+      }, 50);
+    }, 200);
+  }, [currentPage, isTransitioning, fadeAnim]);
 
   const navigateToHome = useCallback(() => {
-    router.navigate('/');
+    router.replace('/');
   }, [router]);
 
   const handleNext = () => {
-    try {
-      buttonScale.value = withSpring(0.95);
-      setTimeout(() => {
-        buttonScale.value = withSpring(1);
-      }, 100);
+    if (isTransitioning) return;
+    
+    buttonScale.value = withSpring(0.95);
+    setTimeout(() => {
+      buttonScale.value = withSpring(1);
+    }, 100);
 
-      if (currentPage < pages.length - 1) {
-        const nextPage = currentPage + 1;
-        
-        fadeAnim.value = withTiming(0.5, { duration: 150 });
+    if (currentPage < pages.length - 1) {
+      const nextPage = currentPage + 1;
+      
+      fadeAnim.value = withTiming(0.5, { duration: 150 });
+      
+      setTimeout(() => {
+        goToNextPage(nextPage);
         
         setTimeout(() => {
-          goToNextPage(nextPage);
-          
-          setTimeout(() => {
-            fadeAnim.value = withTiming(1, { duration: 250 });
-          }, 50);
-        }, 200);
-      } else {
-        navigateToHome();
-      }
-    } catch (error) {
-      console.error('Error in handleNext:', error);
-      if (currentPage < pages.length - 1) {
-        setCurrentPage(currentPage + 1);
-      } else {
-        router.navigate('/');
-      }
+          fadeAnim.value = withTiming(1, { duration: 250 });
+        }, 50);
+      }, 200);
+    } else {
+      navigateToHome();
     }
   };
 
   const handleSkip = () => {
-    router.navigate('/');
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    
+    fadeAnim.value = withTiming(0, { duration: 300 });
+    
+    setTimeout(() => {
+      navigateToHome();
+    }, 300);
   };
 
   const animatedContentStyle = useAnimatedStyle(() => {
@@ -129,6 +192,7 @@ export default function OnboardingScreen() {
           maxToRenderPerBatch={3}
           windowSize={3}
           removeClippedSubviews={false}
+          extraData={currentPage} 
         />
       </Animated.View>
       
@@ -146,16 +210,18 @@ export default function OnboardingScreen() {
         </View>
         
         <View style={styles.buttonContainer}>
-          <Button 
-            title="Pular" 
-            variant="secondary" 
-            onPress={handleSkip}
-          />
-          <Animated.View style={animatedButtonStyle}>
+          <View style={isTransitioning ? styles.disabledButton : null}>
+            <Button 
+              title="Pular" 
+              variant="secondary" 
+              onPress={isTransitioning ? undefined : handleSkip}
+            />
+          </View>
+          <Animated.View style={[animatedButtonStyle, isTransitioning ? styles.disabledButton : null]}>
             <Button 
               title={currentPage === pages.length - 1 ? "Começar" : "Próximo"} 
               variant="primary"
-              onPress={handleNext}
+              onPress={isTransitioning ? undefined : handleNext}
             />
           </Animated.View>
         </View>
@@ -197,5 +263,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     gap: 16,
+  },
+  disabledButton: {
+    opacity: 0.6,
   },
 }); 

@@ -9,7 +9,7 @@ export default function HomeSignInScreen() {
     const router = useRouter();
 
     const handleGoToOnboarding = () => {
-        router.navigate("/onboarding");
+        router.push('/onboarding');
     };
 
     return (

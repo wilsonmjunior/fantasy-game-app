@@ -18,10 +18,10 @@ import { Colors } from '../constants/Colors';
  
 SplashScreen.preventAutoHideAsync();
 
-// SplashScreen.setOptions({
-//   duration: 1 * 1000,
-//   fade: true
-// });
+SplashScreen.setOptions({
+  duration: 1 * 1000,
+  fade: true
+});
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
@@ -45,10 +45,35 @@ export default function RootLayout() {
   return (
     <GestureHandlerRootView style={styles.container}>
       <SafeAreaProvider>
-        <Stack screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="onboarding/index" options={{ headerShown: false }} />
-          <Stack.Screen name="index" options={{ headerShown: false }} />
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack 
+          screenOptions={{ 
+            headerShown: false,
+            animation: 'fade',
+          }}
+          initialRouteName="onboarding"
+        >
+          <Stack.Screen 
+            name="index" 
+            options={{ 
+              headerShown: false,
+              gestureEnabled: false,
+            }} 
+          />
+          <Stack.Screen 
+            name="onboarding/index" 
+            options={{ 
+              headerShown: false,
+              animation: 'fade',
+              gestureEnabled: false,
+            }} 
+          />
+          <Stack.Screen 
+            name="(tabs)" 
+            options={{ 
+              headerShown: false,
+              gestureEnabled: false,
+            }} 
+          />
         </Stack>
       </SafeAreaProvider>
 
