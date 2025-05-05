@@ -39,11 +39,11 @@ const styles = StyleSheet.create({
     playerName: {
         color: Colors.white, 
         fontSize: 14, 
-        fontFamily: 'Poppins_700Bold' 
+        fontFamily: 'Poppins_600SemiBold',
     },
     playerPoints: {
         color: Colors.white, 
-        fontSize: 14, 
+        fontSize: 12, 
         fontFamily: 'Poppins_400Regular' 
     },
 })
