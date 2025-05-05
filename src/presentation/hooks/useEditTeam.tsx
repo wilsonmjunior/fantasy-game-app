@@ -39,11 +39,9 @@ export function useEditTeam({ teamId }: UseEditParams) {
       }
 
       await updateTeam({
-        data: {
-          ...team,
-          name: teamName,
-          shield: teamShield,
-        }
+        ...team,
+        name: teamName,
+        shield: teamShield,
       });
       
       router.push('/(tabs)/team/edit/select-players'); 
