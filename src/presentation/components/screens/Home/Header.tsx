@@ -4,19 +4,26 @@ import {
     Text,
     View,
 } from "react-native";
+import { useRouter } from "expo-router";
 
 import { Colors } from "@/src/constants/Colors";
 import { Icon } from "../../Icon";
 
 export function Header() {
+    const router = useRouter();
+    
+    const handleGoToProfile = () => {
+        router.push('/profile');
+    };
+
     return (
         <View style={styles.container}>
             <View style={styles.profile}>
-                <Pressable onPress={() => {}}>
+                <Pressable onPress={handleGoToProfile}>
                     <Icon name="FGProfile" size={24} color={Colors.white} />
                 </Pressable>
 
-                <Text style={styles.profileName}>Jonh Doe</Text>
+                <Text style={styles.profileName}>John Doe</Text>
             </View>
 
             <Pressable onPress={() => {}}>

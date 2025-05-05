@@ -74,6 +74,14 @@ export default function RootLayout() {
               gestureEnabled: false,
             }} 
           />
+          <Stack.Screen 
+            name="profile" 
+            options={{ 
+              headerShown: false,
+              animation: 'slide_from_left',
+              gestureEnabled: true,
+            }} 
+          />
         </Stack>
       </SafeAreaProvider>
 
