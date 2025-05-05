@@ -5,10 +5,10 @@ import { Colors } from "@/src/constants/Colors";
 type TeamHeaderProps = {
     teamName: string;
     teamShield: string;
-    roundPoints: number;
+    totalRating: number;
 }
 
-export function TeamHeader({ teamName, teamShield, roundPoints }: TeamHeaderProps) {
+export function TeamHeader({ teamName, teamShield, totalRating }: TeamHeaderProps) {
     return (
         <View style={styles.container}>
             <View style={styles.shieldWrapper}>
@@ -19,7 +19,7 @@ export function TeamHeader({ teamName, teamShield, roundPoints }: TeamHeaderProp
                 <Text style={styles.teamName}>{teamName}</Text>
                 <Text style={styles.points}>Pontuação da rodada:{' '}
                     <Text style={{ fontWeight: 'bold' }}>
-                        {roundPoints}
+                        {totalRating}
                     </Text>
                 </Text>
             </View>
