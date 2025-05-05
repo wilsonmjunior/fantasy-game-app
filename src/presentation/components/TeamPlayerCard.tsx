@@ -1,3 +1,4 @@
+import { memo } from "react";
 import {
     Image,
     StyleSheet,
@@ -16,7 +17,7 @@ type TeamPlayerCardProps = {
   onToggle?: () => void;
 }
 
-export function TeamPlayerCard({ player, isSelected, onToggle }: TeamPlayerCardProps) {
+function TeamPlayerCardComponent({ player, isSelected, onToggle }: TeamPlayerCardProps) {
   return (
     <RectButton 
       style={[styles.container, isSelected && styles.selected]} 
@@ -40,7 +41,7 @@ export function TeamPlayerCard({ player, isSelected, onToggle }: TeamPlayerCardP
       <View style={styles.content}> 
         <Text style={styles.playerName} numberOfLines={1}>{player.name}</Text>
         <View style={styles.positionBadge}>
-          <Text style={styles.positionBadgeText}>{player.position}</Text>
+          <Text style={styles.positionBadgeText}>{player.fieldPosition}</Text>
         </View>
       </View>
       
@@ -52,6 +53,8 @@ export function TeamPlayerCard({ player, isSelected, onToggle }: TeamPlayerCardP
     </RectButton>
   );
 };
+
+export const TeamPlayerCard = memo(TeamPlayerCardComponent);
 
 const styles = StyleSheet.create({
   container: {
