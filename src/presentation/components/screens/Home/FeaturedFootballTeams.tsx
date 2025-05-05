@@ -1,35 +1,21 @@
+import { FlatList, StyleSheet, Text, View } from "react-native";
+
 import { Colors } from "@/src/constants/Colors";
-import { Dimensions, FlatList, StyleSheet, Text, View } from "react-native";
-
-const width = Dimensions.get('screen').width/1.5;
-
-function FeaturedFootballTeam() {
-    return (
-        <View style={styles2.container}>
-
-        </View>
-    );
-}
-
-const styles2 = StyleSheet.create({
-    container: {
-        width,
-        height: 144,
-        backgroundColor: 'white',
-        borderRadius: 16,
-    }
-});
+import { useFootballMatches } from "@/src/presentation/hooks";
+import { FeaturedFootballTeam } from "./FeaturedFootballItem";
 
 export function FeaturedFootballTeams() {
+    const { liveMatches } = useFootballMatches();
+
     return (
         <View>
             <Text style={styles.title}>Jogos ao vivo</Text>
 
             <FlatList 
-                data={[1,2]}
+                data={liveMatches}
                 horizontal
                 renderItem={({ item }) => (
-                    <FeaturedFootballTeam />
+                    <FeaturedFootballTeam item={item} />
                 )}
                 ItemSeparatorComponent={() => <View style={{ width: 16 }} />}
                 style={styles.list}
