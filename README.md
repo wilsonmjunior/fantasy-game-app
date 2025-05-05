@@ -184,13 +184,14 @@ Para animações fluídas, o projeto usa Reanimated. Certifique-se de que o plug
 4. Push para a branch (`git push origin feature/amazing-feature`)
 5. Abra um Pull Request
 
-## Screenshots
-![IMG_7427](https://github.com/user-attachments/assets/e5008b68-9dad-4290-b629-9ecb861ca43b)
-![IMG_7428](https://github.com/user-attachments/assets/88735a64-f76a-4ce2-a437-2d72d1cc8514)
-![IMG_7429](https://github.com/user-attachments/assets/cadfe3ad-b82c-44ef-9f4e-3678254d4e8b)
-![IMG_7426](https://github.com/user-attachments/assets/1d44a668-521a-4c4c-b4bc-4ee826548dda)
+## 📸 Screenshots
 
-
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/e5008b68-9dad-4290-b629-9ecb861ca43b" width="200" alt="Tela de Login" />
+  <img src="https://github.com/user-attachments/assets/88735a64-f76a-4ce2-a437-2d72d1cc8514" width="200" alt="Tela de Onboarding" />
+  <img src="https://github.com/user-attachments/assets/cadfe3ad-b82c-44ef-9f4e-3678254d4e8b" width="200" alt="Jogos ao Vivo" />
+  <img src="https://github.com/user-attachments/assets/1d44a668-521a-4c4c-b4bc-4ee826548dda" width="200" alt="Perfil de Time" />
+</div>
 
 ## 📄 Licença
 
