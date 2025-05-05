@@ -191,6 +191,10 @@ Para animações fluídas, o projeto usa Reanimated. Certifique-se de que o plug
   <img src="https://github.com/user-attachments/assets/88735a64-f76a-4ce2-a437-2d72d1cc8514" width="200" alt="Tela de Onboarding" />
   <img src="https://github.com/user-attachments/assets/cadfe3ad-b82c-44ef-9f4e-3678254d4e8b" width="200" alt="Jogos ao Vivo" />
   <img src="https://github.com/user-attachments/assets/1d44a668-521a-4c4c-b4bc-4ee826548dda" width="200" alt="Perfil de Time" />
+  <img src="https://github.com/user-attachments/assets/c386d97e-c77a-4915-b803-816fedceee7d" width="200" />
+  <img src="https://github.com/user-attachments/assets/3f48777f-501d-4769-9bf2-1c914ad453da" width="200" />
+  <img src="https://github.com/user-attachments/assets/4cd9073b-b96c-4061-81fd-ec52bf98c260" width="200" />
+  <img src="https://github.com/user-attachments/assets/d886b981-1890-481a-a0bd-ae6ae2056477" width="200" />
 </div>
 
 ## 📄 Licença
