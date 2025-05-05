@@ -57,10 +57,10 @@ const styles = StyleSheet.create({
     container: { 
         justifyContent: 'center', 
         alignItems: 'center',
-        borderRadius: '50%',
+        borderRadius: 64,
     },
     image: {
         backgroundColor: Colors.neutral[100],
-        borderRadius: '50%',
+        borderRadius: 64,
     }
 });
