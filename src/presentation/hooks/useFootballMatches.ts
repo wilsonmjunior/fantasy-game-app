@@ -11,7 +11,6 @@ export function useFootballMatches() {
         async function load() {
             try {
                 const response = await getFootballLiveMatches();
-                console.log('delta:: ', response);
                 setLiveMatches(response);
             } catch (error) {
                 console.log('error: ', error);

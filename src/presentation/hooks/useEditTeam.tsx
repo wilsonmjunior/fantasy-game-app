@@ -46,7 +46,6 @@ export function useEditTeam({ teamId }: UseEditParams) {
       
       router.push('/(tabs)/team/edit/select-players'); 
     } catch (error) {
-      console.log('delta:error: ', error);
       Alert.alert('Erro', 'Erro ao salvar dados do time.');
     }
   }, [
