@@ -22,6 +22,10 @@
       },
       "package": "com.wilsonmjuniorx.fantasygame"
     },
+    "androidNavigationBar": {
+      "backgroundColor": "#171717",
+      "barStyle": "light-content"
+    },
     "web": {
       "bundler": "metro",
       "output": "static",
