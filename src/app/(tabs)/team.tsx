@@ -18,7 +18,7 @@ export default function TeamScreen() {
   const { team } = useLoadTeam();
 
   const handleEditPress = useCallback((teamId?: string) => {
-    router.push(`/(tabs)/team/edit/${teamId}`);
+    router.push(`/team/${teamId}`);
   }, []);
 
   return (
