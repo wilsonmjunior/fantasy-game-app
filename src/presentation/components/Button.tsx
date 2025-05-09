@@ -29,8 +29,14 @@ export function Button({
     };
 
     return (
-        <RectButton style={[styles.container, { backgroundColor: variants[variant] }]} {...otherProps}>
-            { iconLeft ? <Icon name={iconLeft} size={20} color={iconColor} /> : (
+        <RectButton 
+            style={[styles.container, { 
+                backgroundColor: variants[variant],
+                justifyContent: iconRight ? 'space-between' : 'center'
+            }]} 
+            {...otherProps}
+        >
+            { iconLeft ? <Icon name={iconLeft} size={20} color={iconColor} /> : iconRight && (
                 <View style={{ width: 24 }} />
             )}
 
@@ -48,7 +54,6 @@ const styles = StyleSheet.create({
         padding: 16,
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between',
         borderRadius: 16,
         gap: 16,
     },
