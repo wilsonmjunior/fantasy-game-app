@@ -26,7 +26,8 @@ export default function RankingScreen() {
                                     avatarImage={top.image}
                                     avatarSize={top.position === 1 ? "lg" : "md"}
                                     name={top.name}
-                                    points={top.rating} 
+                                    rating={top.rating} 
+                                    position={top.position} 
                                 />
                             ))
                         }

@@ -7,21 +7,24 @@ type PlayerProps = {
     name: string;
     avatarImage: string;
     avatarSize: AvatarSize;
-    points: number;
+    rating: number;
+    position: number;
 };
 
 export function RankingPlayer({
     name,
     avatarImage,
     avatarSize, 
-    points 
+    rating,
+    position,
 }: PlayerProps) {
     return (
         <View style={styles.container}> 
             <AvatarPlayer imageUri={avatarImage} size={avatarSize} />
             <View style={styles.textContainer}>
+                <Text style={styles.playerName}>{position}</Text>
                 <Text style={styles.playerName}>{name}</Text>
-                <Text style={styles.playerPoints}>{`${points} XP`}</Text>
+                <Text style={styles.playerRating}>{`${rating} XP`}</Text>
             </View>
         </View>
     );
@@ -41,7 +44,7 @@ const styles = StyleSheet.create({
         fontSize: 14, 
         fontFamily: 'Poppins_600SemiBold',
     },
-    playerPoints: {
+    playerRating: {
         color: Colors.white, 
         fontSize: 12, 
         fontFamily: 'Poppins_400Regular' 
