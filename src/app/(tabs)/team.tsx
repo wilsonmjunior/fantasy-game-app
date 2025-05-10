@@ -24,7 +24,8 @@ export default function TeamScreen() {
   return (
     <View style={styles.container}>
       <Header 
-        title="Time" icon="pencil" 
+        title="Time" 
+        icon="pencil" 
         onButtonPress={() => handleEditPress(team?.id)}
         style={styles.header}
       />

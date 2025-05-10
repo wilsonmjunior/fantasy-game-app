@@ -61,12 +61,13 @@ const styles = StyleSheet.create({
     editButtonContainer: { 
         flexDirection: 'row', 
         justifyContent: 'flex-end',
+        backgroundColor: Colors.primary[50]+20, 
+        borderRadius: 4, 
+        padding: 2,
     },
     editButton: {
         width: 26, 
         height: 26, 
-        borderRadius: 4, 
-        backgroundColor: Colors.primary[50]+20, 
         alignItems: 'center', 
         justifyContent: 'center',
     }
