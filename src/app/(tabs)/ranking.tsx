@@ -3,11 +3,15 @@ import { FlatList, StyleSheet, View } from "react-native";
 import { Colors } from "@/src/constants/Colors";
 import { getStatusBarHeight } from "@/src/status-bar";
 import { Header, PlayerCard } from "@/src/presentation/components";
-import { RankingPlayer } from "@/src/presentation/components/screens/Ranking";
+import { RankingPlayer, RankingSkeleton } from "@/src/presentation/components/screens/Ranking";
 import { useRanking } from "@/src/presentation/hooks";
 
 export default function RankingScreen() {
-    const { ranking, topRanking } = useRanking();
+    const { ranking, topRanking, isLoading } = useRanking();
+
+    if (isLoading) {
+        return <RankingSkeleton />
+    }
 
     return (
         <View style={styles.container}>

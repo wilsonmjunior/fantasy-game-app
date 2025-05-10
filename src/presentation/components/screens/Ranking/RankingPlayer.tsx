@@ -34,9 +34,7 @@ export function RankingPlayer({
 }
 
 const styles = StyleSheet.create({
-    container: {
-
-    },
+    container: { },
     textContainer: {
         gap: 4,
         marginTop: 8,
