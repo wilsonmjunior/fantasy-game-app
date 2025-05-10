@@ -9,26 +9,30 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import Logo from '@/assets/images/logo.png';
+import { Colors } from '@/src/constants/Colors';
 
-import { Colors } from '../../constants/Colors';
+type PageItemProps = {
+    title: string;
+    description: string;
+};
 
-export default function OnboardingPage3() {
-  const logoScale = useSharedValue(0.8);
+export function PageItem({ title, description }: PageItemProps) {
+  const logoScale = useSharedValue(0);
   const logoOpacity = useSharedValue(0);
-  const titleTranslateY = useSharedValue(-30);
+  const titleTranslateY = useSharedValue(20);
   const titleOpacity = useSharedValue(0);
-  const descriptionTranslateX = useSharedValue(50);
+  const descriptionTranslateY = useSharedValue(20);
   const descriptionOpacity = useSharedValue(0);
 
   useEffect(() => {
-    logoScale.value = withDelay(300, withSpring(1.1, { damping: 10 }));
-    logoOpacity.value = withTiming(1, { duration: 800 });
+    logoScale.value = withDelay(300, withSpring(1, { damping: 12 }));
+    logoOpacity.value = withDelay(300, withTiming(1, { duration: 700 }));
     
-    titleTranslateY.value = withDelay(500, withSpring(0, { damping: 12 }));
-    titleOpacity.value = withDelay(500, withTiming(1, { duration: 600 }));
+    titleTranslateY.value = withDelay(600, withSpring(0, { damping: 10 }));
+    titleOpacity.value = withDelay(600, withTiming(1, { duration: 700 }));
     
-    descriptionTranslateX.value = withDelay(700, withSpring(0, { damping: 10 }));
-    descriptionOpacity.value = withDelay(700, withTiming(1, { duration: 600 }));
+    descriptionTranslateY.value = withDelay(800, withSpring(0, { damping: 8 }));
+    descriptionOpacity.value = withDelay(800, withTiming(1, { duration: 700 }));
   }, []);
 
   const logoAnimatedStyle = useAnimatedStyle(() => ({
@@ -42,7 +46,7 @@ export default function OnboardingPage3() {
   }));
 
   const descriptionAnimatedStyle = useAnimatedStyle(() => ({
-    transform: [{ translateX: descriptionTranslateX.value }],
+    transform: [{ translateY: descriptionTranslateY.value }],
     opacity: descriptionOpacity.value,
   }));
 
@@ -54,12 +58,13 @@ export default function OnboardingPage3() {
           style={[styles.image, logoAnimatedStyle]} 
         />
       </View>
+
       <View style={styles.textContainer}>
         <Animated.Text style={[styles.title, titleAnimatedStyle]}>
-          Crie suas Próprias Ligas
+          {title}
         </Animated.Text>
         <Animated.Text style={[styles.description, descriptionAnimatedStyle]}>
-          Convide seus amigos e crie ligas personalizadas para competir entre vocês
+          {description}
         </Animated.Text>
       </View>
     </View>
@@ -93,13 +98,13 @@ const styles = StyleSheet.create({
     fontSize: 24,
     textAlign: 'center',
     marginBottom: 16,
-    color: Colors.primary[600],
+    color: Colors.white,
   },
   description: {
     fontFamily: 'Poppins_400Regular',
     fontSize: 16,
     textAlign: 'center',
-    color: Colors.neutral[600],
+    color: Colors.neutral[500],
     paddingHorizontal: 24,
   },
 }); 

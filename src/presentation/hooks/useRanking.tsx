@@ -6,6 +6,7 @@ import { Ranking } from "@/src/domain/entities";
 export function useRanking() {
     const [ranking, setRanking] = useState<Ranking[]>([]);
     const [topRanking, setTopRanking] = useState<Ranking[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         async function load() {
@@ -19,7 +20,8 @@ export function useRanking() {
                 setTopRanking(topThreePositions);
                 setRanking(restRankingPositions);
             } catch (error) {
-                
+            } finally {
+                setIsLoading(false);
             }
         }
 
@@ -29,5 +31,6 @@ export function useRanking() {
     return {
         ranking,
         topRanking,
+        isLoading,
     }
 }

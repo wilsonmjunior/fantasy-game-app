@@ -1,4 +1,9 @@
-import React, { useRef, useState, useCallback, useEffect } from 'react';
+import React, {
+  useRef,
+  useState,
+  useCallback,
+  useEffect,
+} from 'react';
 import {
   StyleSheet,
   View,
@@ -18,26 +23,15 @@ import Animated, {
 
 import { Colors } from '../../constants/Colors';
 import { Button } from '../../presentation/components';
-
-import OnboardingPage1 from '@/src/app/onboarding/page1';
-import OnboardingPage2 from '@/src/app/onboarding/page2';
-import OnboardingPage3 from '@/src/app/onboarding/page3';
+import { PageItem } from '../../presentation/components/screens/Onboarding';
 
 const { width } = Dimensions.get('window');
 
 const pages = [
-  { id: '1', component: OnboardingPage1 },
-  { id: '2', component: OnboardingPage2 },
-  { id: '3', component: OnboardingPage3 },
-];
-
-const PageItem = ({ Component }: { Component: React.ComponentType }) => {
-  return (
-    <View style={{ width }}>
-      <Component />
-    </View>
-  );
-};
+  { id: '1', title: 'Bem-vindo ao Fantasy Game', description: 'Crie times virtuais com jogadores reais e compita com seus amigos' },
+  { id: '2', title: 'Acompanhe Suas Competições', description: 'Acompanhe a pontuação em tempo real e veja como seu time está se saindo' },
+  { id: '3', title: 'Crie suas Próprias Ligas', description: 'Convide seus amigos e crie ligas personalizadas para competir entre vocês' },
+] as const;
 
 export default function OnboardingScreen() {
   const [currentPage, setCurrentPage] = useState(0);
@@ -183,7 +177,11 @@ export default function OnboardingScreen() {
         <FlatList
           ref={flatListRef}
           data={pages}
-          renderItem={({ item }) => <PageItem Component={item.component} />}
+          renderItem={({ item }) => (
+            <View style={{ width }}>
+              <PageItem title={item.title} description={item.description} />
+            </View>
+          )}
           keyExtractor={(item) => item.id}
           horizontal
           showsHorizontalScrollIndicator={false}
