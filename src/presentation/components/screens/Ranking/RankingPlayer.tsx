@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 
 import { AvatarPlayer, AvatarSize } from "../../AvatarPlayer";
 import { Colors } from "@/src/constants/Colors";
+import { Icon } from "../../Icon";
 
 type PlayerProps = {
     name: string;
@@ -18,11 +19,13 @@ export function RankingPlayer({
     rating,
     position,
 }: PlayerProps) {
+    const medal = position === 1 ? 'gold' : position === 2 ? 'silver' : 'bronze';
+    
     return (
         <View style={styles.container}> 
             <AvatarPlayer imageUri={avatarImage} size={avatarSize} />
             <View style={styles.textContainer}>
-                <Text style={styles.playerName}>{position}</Text>
+                <Icon name="medal-outline" size={24} color={Colors.medals[medal]} />
                 <Text style={styles.playerName}>{name}</Text>
                 <Text style={styles.playerRating}>{`${rating} XP`}</Text>
             </View>
