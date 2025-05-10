@@ -20,7 +20,7 @@ export function RankingPlayer({
     position,
 }: PlayerProps) {
     const medal = position === 1 ? 'gold' : position === 2 ? 'silver' : 'bronze';
-    
+
     return (
         <View style={styles.container}> 
             <AvatarPlayer imageUri={avatarImage} size={avatarSize} />
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     },
     playerRating: {
         color: Colors.white, 
-        fontSize: 12, 
+        fontSize: 14, 
         fontFamily: 'Poppins_400Regular' 
     },
 })
