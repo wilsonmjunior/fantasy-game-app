@@ -1,12 +1,14 @@
 import { FlatList, StyleSheet, Text, View } from "react-native";
 
 import { Colors } from "@/src/constants/Colors";
-import { useFootballMatches } from "@/src/presentation/hooks";
+import { FootballMatch } from "@/src/domain/entities";
 import { FeaturedFootballTeam } from "./FeaturedFootballItem";
 
-export function FeaturedFootballTeams() {
-    const { liveMatches } = useFootballMatches();
+type FeaturedFootballTeamsProps = {
+    liveMatches?: FootballMatch[]
+};
 
+export function FeaturedFootballTeams({ liveMatches }: FeaturedFootballTeamsProps) {
     return (
         <View>
             <Text style={styles.title}>Jogos ao vivo</Text>

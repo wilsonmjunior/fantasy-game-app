@@ -7,7 +7,7 @@ import {
 import { useRouter } from "expo-router";
 
 import { Colors } from "@/src/constants/Colors";
-import { Icon } from "../../Icon";
+import { Icon } from "../../../Icon";
 
 export function Header() {
     const router = useRouter();
