@@ -5,3 +5,4 @@ export * from './Icon';
 export * from './Input';
 export * from './PlayerCard';
 export * from './TeamPlayerCard';
+export * from './skeleton';
