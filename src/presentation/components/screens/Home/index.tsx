@@ -9,7 +9,7 @@ import { HomeSkeleton } from "./HomeSkeleton";
 export function Home() {
     const { liveMatches, isLoading } = useFootballMatches();
   
-    if (!isLoading) {
+    if (isLoading) {
       return <HomeSkeleton />;
     }
 
