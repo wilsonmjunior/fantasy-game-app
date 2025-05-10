@@ -14,6 +14,8 @@ export function PlayerCard({ player, ...othersProps }: PlayerCardProps) {
         <Pressable style={styles.container} {...othersProps}>
             <AvatarPlayer imageUri={player.image} size="xs" featuredColor={Colors.primary[100]} />
 
+            <Text style={styles.positionText}>{player.position}</Text>
+
             <View style={styles.content}>
                 <Text style={styles.playerName}>
                     {player.name}
@@ -52,5 +54,11 @@ const styles = StyleSheet.create({
         fontSize: 14, 
         fontFamily: 'Poppins_400Regular',
         textTransform: 'uppercase',
+    },
+    positionText: {
+        color: Colors.white, 
+        fontSize: 14, 
+        fontFamily: 'Poppins_500Medium', 
+        marginLeft: 16
     },
 });
